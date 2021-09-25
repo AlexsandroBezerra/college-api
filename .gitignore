@@ -78,3 +78,6 @@ typings/
 # Database
 database.sqlite
 database.sqlite-journal
+
+# Build
+dist

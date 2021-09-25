@@ -1,0 +1,25 @@
+{
+  "name": "college-backend",
+  "version": "1.0.0",
+  "description": "Backend college project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexsandroBezerra/college-backend.git"
+  },
+  "keywords": [],
+  "author": "Alexsandro G Bezerra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexsandroBezerra/college-backend/issues"
+  },
+  "homepage": "https://github.com/AlexsandroBezerra/college-backend#readme",
+  "devDependencies": {
+    "@types/node": "^16.10.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}

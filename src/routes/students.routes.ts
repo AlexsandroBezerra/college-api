@@ -1,6 +1,7 @@
 import { Router } from "express";
+import { tasksStudentsController } from "../controllers/TasksStudentsController";
 
-import { prismaClient } from "../database/client";
+import { prismaClient } from "../database";
 
 export const studentsRouter = Router();
 
@@ -22,3 +23,5 @@ studentsRouter.post("/", async (request, response) => {
 
   return response.json(student);
 });
+
+studentsRouter.use("/:id/tasks", tasksStudentsController.create);

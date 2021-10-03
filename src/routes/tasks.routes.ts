@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { prismaClient } from "../database/client";
+import { prismaClient } from "../database";
 
 export const tasksRouter = Router();
 

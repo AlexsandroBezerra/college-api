@@ -19,6 +19,6 @@ export const tasksController: TasksController = {
       },
     });
 
-    return response.json(task);
+    return response.status(201).json(task);
   },
 };

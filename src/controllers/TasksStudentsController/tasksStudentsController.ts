@@ -14,6 +14,6 @@ export const tasksStudentsController: TasksStudentsController = {
       },
     });
 
-    return response.json(tasksDoneByStudent);
+    return response.status(201).json(tasksDoneByStudent);
   },
 };

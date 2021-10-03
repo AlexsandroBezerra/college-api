@@ -1,6 +1,7 @@
 import { StudentsController } from "./types";
 
 import { prismaClient } from "../../database";
+import { AppError } from "../../errors";
 
 export const studentsController: StudentsController = {
   async index(_, response) {
@@ -12,13 +13,17 @@ export const studentsController: StudentsController = {
   async create(request, response) {
     const { name, registration } = request.body;
 
-    const student = await prismaClient.student.create({
-      data: {
-        id: registration,
-        name,
-      },
-    });
+    try {
+      const student = await prismaClient.student.create({
+        data: {
+          id: registration,
+          name,
+        },
+      });
 
-    return response.json(student);
+      return response.status(201).json(student);
+    } catch {
+      throw new AppError("Student already exists", 409);
+    }
   },
 };

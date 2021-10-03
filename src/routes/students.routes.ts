@@ -1,11 +1,18 @@
 import { Router } from "express";
 
-import { studentsController } from "../controllers/StudentsController";
-import { tasksStudentsController } from "../controllers/TasksStudentsController";
+import { bodyValidator } from "../middlewares";
+import { studentsController, tasksStudentsController } from "../controllers";
+
+import { createStudentsValidator } from "../validators";
 
 export const studentsRouter = Router();
 
 studentsRouter.get("/", studentsController.index);
-studentsRouter.post("/", studentsController.create);
+
+studentsRouter.post(
+  "/",
+  bodyValidator(createStudentsValidator),
+  studentsController.create
+);
 
 studentsRouter.post("/:id/tasks", tasksStudentsController.create);

@@ -1,0 +1,1 @@
+export { studentsController } from "./studentsController";

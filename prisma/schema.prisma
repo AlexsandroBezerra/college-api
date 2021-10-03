@@ -21,3 +21,9 @@ model Student {
   id Int @id
   name String
 }
+
+model Task {
+  id Int @default(autoincrement()) @id
+  title String
+  reward Int @default(2)
+}

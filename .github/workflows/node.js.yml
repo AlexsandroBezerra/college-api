@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Node.js CI/CD
 
 on:
   push:
@@ -31,5 +31,6 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
         source: "dist,prisma,package.json,.env.example,tsconfig.json,yarn.lock"
         target: "~/deploy"

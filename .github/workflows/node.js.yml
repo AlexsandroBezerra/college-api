@@ -44,6 +44,8 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd ~/deploy
+          whoami
+          ls -al
           yarn
           yarn prisma migrate deploy
           pm2 restart all

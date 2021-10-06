@@ -4,7 +4,11 @@ import { prismaClient } from "../../database";
 
 export const tasksController: TasksController = {
   async index(_, response) {
-    const tasks = await prismaClient.task.findMany();
+    const tasks = await prismaClient.task.findMany({
+      where: {
+        isEnabled: true,
+      },
+    });
 
     return response.json(tasks);
   },
@@ -21,4 +25,15 @@ export const tasksController: TasksController = {
 
     return response.status(201).json(task);
   },
+
+  async delete(request, response) {
+    const { id } = request.params
+
+    await prismaClient.task.update({
+      where: { id: Number(id) },
+      data: { isEnabled: false },
+    })
+
+    return response.status(204).send()
+  }
 };

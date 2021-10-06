@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "studio": "prisma studio"
   },
   "repository": {
     "type": "git",

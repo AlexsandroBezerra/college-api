@@ -28,6 +28,7 @@ model Task {
   title String
   reward Int @default(2)
   studens TasksDoneByStudent[]
+  isEnabled Boolean @default(true)
 }
 
 model TasksDoneByStudent {

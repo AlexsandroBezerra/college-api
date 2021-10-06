@@ -13,3 +13,5 @@ tasksRouter.post(
   bodyValidator(createTaskValidator),
   tasksController.create
 );
+
+tasksRouter.delete("/:id", tasksController.delete);

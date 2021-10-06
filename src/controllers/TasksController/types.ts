@@ -13,4 +13,9 @@ export interface TasksController {
     request: Request<{}, {}, CreateTaskBody, {}>,
     response: Response<Task>
   ): Promise<Response>;
+
+  delete(
+      request: Request<{ id: string }, {}, {}, {}>,
+      response: Response
+  ): Promise<Response>;
 }

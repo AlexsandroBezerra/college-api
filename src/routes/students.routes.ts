@@ -15,4 +15,5 @@ studentsRouter.post(
   studentsController.create
 );
 
+studentsRouter.get("/:id/tasks", tasksStudentsController.index);
 studentsRouter.post("/:id/tasks", tasksStudentsController.create);

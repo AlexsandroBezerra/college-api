@@ -27,7 +27,7 @@ model Task {
   id Int @default(autoincrement()) @id
   title String
   reward Int @default(2)
-  studens TasksDoneByStudent[]
+  students TasksDoneByStudent[]
   isEnabled Boolean @default(true)
 }
 

@@ -4,6 +4,42 @@ import { prismaClient } from "../../database";
 import { AppError } from "../../errors";
 
 export const tasksStudentsController: TasksStudentsController = {
+  async index(request, response) {
+    const { id } = request.params;
+
+    const tasksDone = await prismaClient.task.findMany({
+      where: {
+        isEnabled: true,
+        students: {
+          some: {
+            studentId: Number(id)
+          },
+        },
+      },
+    });
+
+    const tasksPending = await prismaClient.task.findMany({
+      where: {
+        isEnabled: true,
+        students: {
+          none: {
+            studentId: Number(id)
+          },
+        },
+      },
+    });
+
+    const score = tasksDone.reduce((previousValue, currentValue) => {
+      return previousValue + currentValue.reward;
+    }, 0)
+
+    return response.json({
+      score,
+      tasksDone,
+      tasksPending
+    });
+  },
+
   async create(request, response) {
     const { id } = request.params;
     const { taskId } = request.body;

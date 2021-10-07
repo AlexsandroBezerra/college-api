@@ -1,0 +1,1 @@
+export { authConfigs } from "./authConfigs";

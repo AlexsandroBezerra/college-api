@@ -72,7 +72,13 @@ export function addUserInformationToRequest(
   }
 }
 
-export function authentication({ ensureAuthenticated = true }) {
+type AuthenticationOptions = {
+  ensureAuthenticated: boolean;
+};
+
+export function authentication(options?: AuthenticationOptions) {
+  const ensureAuthenticated = options?.ensureAuthenticated || true;
+
   return ensureAuthenticated
     ? ensureAuthenticatedMiddleware
     : addUserInformationToRequest;

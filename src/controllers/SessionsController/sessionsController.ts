@@ -29,6 +29,45 @@ export const sessionsController: SessionsController = {
       expiresIn: authConfigs.jwt.expiredIn,
     });
 
-    return response.json({ token });
+    const { id: refreshToken } = await prismaClient.token.create({
+      data: { professorId: professor.id },
+      select: { id: true },
+    });
+
+    return response.json({ token, refreshToken });
+  },
+
+  async update(request, response) {
+    const id = request.user?.id;
+    const { refreshToken } = request.body;
+
+    const isValidToken = await prismaClient.token.findFirst({
+      where: { id: refreshToken, professorId: id },
+    });
+
+    if (!isValidToken) {
+      throw new AppError("Invalid refreshToken", 401);
+    }
+
+    await prismaClient.token.delete({
+      where: {
+        id: refreshToken,
+      },
+    });
+
+    const token = jwt.sign({}, authConfigs.jwt.secret, {
+      subject: String(id),
+      expiresIn: authConfigs.jwt.expiredIn,
+    });
+
+    const { id: newRefreshToken } = await prismaClient.token.create({
+      data: { professorId: id as number },
+      select: { id: true },
+    });
+
+    return response.json({
+      token,
+      refreshToken: newRefreshToken,
+    });
   },
 };

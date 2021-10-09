@@ -1,10 +1,12 @@
 import { Router } from "express";
 
-import { bodyValidator } from "../middlewares";
+import { authentication, bodyValidator } from "../middlewares";
 import { tasksController } from "../controllers";
 import { createTaskValidator } from "../validators";
 
 export const tasksRouter = Router();
+
+tasksRouter.use(authentication());
 
 tasksRouter.get("/", tasksController.index);
 

@@ -7,6 +7,10 @@ export const sessionsRouter = Router();
 
 sessionsRouter.post("/", sessionsController.create);
 
-sessionsRouter.use(authentication({ ensureAuthenticated: false }));
+sessionsRouter.get("/me", authentication(), sessionsController.index);
 
-sessionsRouter.post("/refresh", sessionsController.update);
+sessionsRouter.post(
+  "/refresh",
+  authentication({ ensureAuthenticated: false }),
+  sessionsController.update
+);

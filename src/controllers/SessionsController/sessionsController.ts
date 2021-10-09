@@ -7,6 +7,20 @@ import { AppError } from "../../errors";
 import { SessionsController } from "./types";
 
 export const sessionsController: SessionsController = {
+  async index(request, response) {
+    const id = request.user?.id;
+
+    const professor = await prismaClient.professor.findFirst({
+      where: { id },
+    });
+
+    if (!professor) {
+      throw new AppError("Invalid token", 401, "invalid.token");
+    }
+
+    return response.json(professor);
+  },
+
   async create(request, response) {
     const { email, password } = request.body;
 
@@ -34,7 +48,11 @@ export const sessionsController: SessionsController = {
       select: { id: true },
     });
 
-    return response.json({ token, refreshToken });
+    return response.json({
+      user: { ...professor, password: undefined } as any,
+      token,
+      refreshToken,
+    });
   },
 
   async update(request, response) {

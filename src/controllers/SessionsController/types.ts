@@ -1,3 +1,4 @@
+import { Professor } from ".prisma/client";
 import { Request, Response } from "express";
 
 type CreateSessionBody = {
@@ -8,6 +9,12 @@ type CreateSessionBody = {
 type CreateSessionResponse = {
   token: string;
   refreshToken: string;
+  user: Professor;
+};
+
+type UpdateSessionResponse = {
+  token: string;
+  refreshToken: string;
 };
 
 type UpdateSessionBody = {
@@ -15,6 +22,11 @@ type UpdateSessionBody = {
 };
 
 export interface SessionsController {
+  index(
+    request: Request<{}, {}, {}, {}>,
+    response: Response<Professor>
+  ): Promise<Response>;
+
   create(
     request: Request<{}, {}, CreateSessionBody, {}>,
     response: Response<CreateSessionResponse>
@@ -22,6 +34,6 @@ export interface SessionsController {
 
   update(
     request: Request<{}, {}, UpdateSessionBody, {}>,
-    response: Response<CreateSessionResponse>
+    response: Response<UpdateSessionResponse>
   ): Promise<Response>;
 }

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { TokenExpiredError } from "jsonwebtoken";
 
 import { authConfigs } from "../configs";
 import { AppError } from "../errors";
@@ -36,7 +36,11 @@ export function ensureAuthenticatedMiddleware(
     request.user = { id };
 
     return next();
-  } catch {
+  } catch (err) {
+    if (err instanceof TokenExpiredError) {
+      throw new AppError("Token expired", 401, "token.expired");
+    }
+
     throw new AppError("Invalid JWT token", 401, "token.invalid");
   }
 }
@@ -77,7 +81,7 @@ type AuthenticationOptions = {
 };
 
 export function authentication(options?: AuthenticationOptions) {
-  const ensureAuthenticated = options?.ensureAuthenticated || true;
+  const ensureAuthenticated = options?.ensureAuthenticated ?? true;
 
   return ensureAuthenticated
     ? ensureAuthenticatedMiddleware

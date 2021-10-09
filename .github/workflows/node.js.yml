@@ -33,7 +33,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         source: "dist,prisma,package.json,.env.example,tsconfig.json,yarn.lock"
-        target: "~/deploy"
+        target: "~/api-estacio"
         
     - name: Run deploy script in DigitalOcean
       uses: appleboy/ssh-action@master
@@ -43,7 +43,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd ~/deploy
+          cd ~/api-estacio
           yarn
           yarn prisma migrate deploy
           pm2 restart all

@@ -37,6 +37,7 @@ model Task {
   reward Int @default(2)
   students TasksDoneByStudent[]
   isEnabled Boolean @default(true)
+  createdAt DateTime @default(now())
 }
 
 model TasksDoneByStudent {

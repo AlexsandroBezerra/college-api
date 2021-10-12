@@ -5,9 +5,39 @@ import { AppError } from "../../errors";
 
 export const studentsController: StudentsController = {
   async index(_, response) {
-    const students = await prismaClient.student.findMany();
+    const students = await prismaClient.student.findMany({
+      orderBy: {
+        name: "asc",
+      },
+      select: {
+        id: true,
+        name: true,
+        tasksDone: {
+          select: {
+            task: {
+              select: {
+                title: true,
+                reward: true,
+              },
+            },
+          },
+        },
+      },
+    });
 
-    return response.json(students);
+    const studentsWithScore = students.map((student) => {
+      const score = student.tasksDone.reduce((previousValue, currentValue) => {
+        return previousValue + currentValue.task.reward;
+      }, 0);
+
+      return {
+        id: student.id,
+        name: student.name,
+        score,
+      };
+    });
+
+    return response.json(studentsWithScore);
   },
 
   async create(request, response) {

@@ -5,6 +5,9 @@ import { prismaClient } from "../../database";
 export const tasksController: TasksController = {
   async index(_, response) {
     const tasks = await prismaClient.task.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
         isEnabled: true,
       },
@@ -27,13 +30,13 @@ export const tasksController: TasksController = {
   },
 
   async delete(request, response) {
-    const { id } = request.params
+    const { id } = request.params;
 
     await prismaClient.task.update({
       where: { id: Number(id) },
       data: { isEnabled: false },
-    })
+    });
 
-    return response.status(204).send()
-  }
+    return response.status(204).send();
+  },
 };

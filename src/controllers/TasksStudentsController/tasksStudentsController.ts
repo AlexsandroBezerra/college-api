@@ -7,12 +7,20 @@ export const tasksStudentsController: TasksStudentsController = {
   async index(request, response) {
     const { id } = request.params;
 
+    const student = await prismaClient.student.findFirst({
+      where: { id: Number(id) },
+    });
+
+    if (!student) {
+      throw new AppError("Student not found", 404);
+    }
+
     const tasksDone = await prismaClient.task.findMany({
       where: {
         isEnabled: true,
         students: {
           some: {
-            studentId: Number(id)
+            studentId: Number(id),
           },
         },
       },
@@ -23,7 +31,7 @@ export const tasksStudentsController: TasksStudentsController = {
         isEnabled: true,
         students: {
           none: {
-            studentId: Number(id)
+            studentId: Number(id),
           },
         },
       },
@@ -31,12 +39,13 @@ export const tasksStudentsController: TasksStudentsController = {
 
     const score = tasksDone.reduce((previousValue, currentValue) => {
       return previousValue + currentValue.reward;
-    }, 0)
+    }, 0);
 
     return response.json({
+      ...student,
       score,
       tasksDone,
-      tasksPending
+      tasksPending,
     });
   },
 
@@ -47,12 +56,12 @@ export const tasksStudentsController: TasksStudentsController = {
     const task = await prismaClient.task.findFirst({
       where: {
         id: taskId,
-        isEnabled: true
+        isEnabled: true,
       },
     });
 
     if (!task) {
-      throw new AppError('taskId provided is invalid')
+      throw new AppError("taskId provided is invalid");
     }
 
     const tasksDoneByStudent = await prismaClient.tasksDoneByStudent.create({

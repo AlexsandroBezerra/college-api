@@ -10,6 +10,7 @@ export function errorHandler(
 ) {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
+      error: true,
       status: "error",
       message: err.message,
       code: err.code,
@@ -19,7 +20,9 @@ export function errorHandler(
   console.error(err);
 
   return response.status(500).json({
+    error: true,
     status: "error",
     message: "Internal server error",
+    code: "internal.error",
   });
 }

@@ -21,6 +21,11 @@ export const studentsController: StudentsController = {
               },
             },
           },
+          where: {
+            task: {
+              isEnabled: true,
+            },
+          },
         },
       },
     });

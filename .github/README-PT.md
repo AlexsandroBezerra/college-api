@@ -1,100 +1,81 @@
 <h2 align="center">
-  Express Application for GoBarber project
+  API Javascript para um trabalho de faculdade
 </h2>
 
-<p align="center">
-  <a href="#about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#license">License</a>
-</p>
+[:us: English version](../README.md)
 
-## 💁 About the project
+## 💁 Sobre o projeto
 
-### :link: Useful links
+Uma API Rest que prover o que é necessário para o professor "gamificar" tarefas de estudantes. Construído com Javascript, essa API usa [Express](https://expressjs.com), [Prisma](https://www.prisma.io) e outras bibliotecas para facilitar na velocidade de desenvolvimento e manutenção do código. Inicialmente, foi escolhido o SQLite como banco de dados principal. Esse repositório é apenas um trabalho de faculdade :)
 
-To see the **GoBarber web client**, [click here](https://github.com/AlexsandroBezerra/gobarber-web) <br />
+Para ver o **cliente web em React**, [clique aqui](https://github.com/AlexsandroBezerra/college-web)
 
-## 💻 Getting started
+## 💻 Introdução
 
-Import the `Insomnia.json` on Insomnia App or click on [Run in Insomnia](#insomnia-button) button
-
-### Requirements
+### Requisitos
 
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
 
-**Clone the project and access the folder**
+**Clone o projeto e acesse a pasta**
 
 ```bash
 $ git clone https://github.com/AlexsandroBezerra/college-api.git
 $ cd college-api
 ```
 
-**Follow the steps below**
+**Siga os passos abaixo**
 
 ```bash
-# Install the dependencies
+# Instale as dependências
 $ yarn
 
-# Make a copy of '.env.example' to '.env'
-# and set with YOUR environment variables.
-# The aws variables do not need to be filled for dev environment
+# Faça uma cópia do arquivo '.env.example' para '.env'
+# e configure suas variáveis de ambiente
 $ cp .env.example .env
 
-# Create the instance of postgreSQL using docker
-$ docker run --name gobarber-postgres -e POSTGRES_USER=docker \
-              -e POSTGRES_DB=gobarber -e POSTGRES_PASSWORD=docker \
-              -p 5432:5432 -d postgres
+# Rode as migrações do banco de dados.
+$ yarn prisma migrate dev
 
-# Create the instance of mongoDB using docker
-$ docker run --name gobarber-mongodb -p 27017:27017 -d -t mongo
+# Para finalizar, rode a API
+$ yarn dev
 
-# Create the instance of redis using docker
-$ docker run --name gobarber-redis -p 6379:6379 -d -t redis:alpine
-
-# Once the services are running, run the migrations
-$ yarn typeorm migration:run
-
-# To finish, run the api service
-$ yarn dev:server
-
-# Well done, project is started!
+# Tudo certo o projeto iniciou
 ```
 
-## 🤔 How to contribute?
+## 🤔 Como contribuir?
 
-**Make a fork of this repository**
+**Faça um fork desse repositório**
 
 ```bash
-# Fork using GitHub official command line
-# If you don't have the GitHub CLI, use the web site to do that.
+# Fork usando a ferramenta de linha de comando oficial do Github
+# Se você não tem a CLI do github, use o site do repositório para isso
 
 $ gh repo fork AlexsandroBezerra/college-api
 ```
 
-**Follow the steps below**
+**Siga os passos abaixo**
 
 ```bash
-# Clone your fork
-$ git clone your-fork-url && cd gobarber-api
+# Clone o seu fork
+$ git clone your-fork-url && cd college-api
 
-# Create a branch with your feature
+# Crie uma brach com sua feature
 $ git checkout -b my-feature
 
-# Make the commit with your changes
+# Faça um commit com suas mudanças
 $ git commit -m 'feat: My new feature'
 
-# Send the code to your remote branch
+# Envie o código para sua branch remota
 $ git push origin my-feature
 ```
 
-After your pull request is merged, you can delete your branch
+Após o ser pull request ser adicionado ao projeto, você pode excluir sua branch
 
-## 📝 License
+## 📝 Licença
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Esse projeto está sobre licença GPL-3.0 License - veja no [arquivo de licença](../LICENSE) para mais detalhes.
 
 ---
 
-Made with :purple_heart: by Alexsandro G Bezerra :wave: &nbsp;[See my Linkedin](https://www.linkedin.com/in/alexsandrobezerra)
+Feito com :green_heart: por Alexsandro G Bezerra :wave: &nbsp;[Veja meu LinkedIn](https://www.linkedin.com/in/alexsandrobezerra)

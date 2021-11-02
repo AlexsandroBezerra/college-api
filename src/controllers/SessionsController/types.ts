@@ -1,6 +1,8 @@
 import { Professor } from ".prisma/client";
 import { Request, Response } from "express";
 
+type GetSessionResponse = Omit<Professor, "password">;
+
 type CreateSessionBody = {
   email: string;
   password: string;
@@ -24,7 +26,7 @@ type UpdateSessionBody = {
 export interface SessionsController {
   index(
     request: Request<{}, {}, {}, {}>,
-    response: Response<Professor>
+    response: Response<GetSessionResponse>
   ): Promise<Response>;
 
   create(

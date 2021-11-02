@@ -18,7 +18,9 @@ export const sessionsController: SessionsController = {
       throw new AppError("Invalid token", 401, "invalid.token");
     }
 
-    return response.json(professor);
+    const professorSanitized = { ...professor, password: undefined };
+
+    return response.json(professorSanitized);
   },
 
   async create(request, response) {

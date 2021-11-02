@@ -1,8 +1,8 @@
 {
-  "name": "college-backend",
+  "name": "college-api",
   "version": "1.0.0",
-  "description": "Backend college project",
-  "main": "index.js",
+  "description": "Javascript API for college project",
+  "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlexsandroBezerra/college-backend.git"
+    "url": "git+https://github.com/AlexsandroBezerra/college-api.git"
   },
   "keywords": [],
   "author": "Alexsandro G Bezerra",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/AlexsandroBezerra/college-backend/issues"
+    "url": "https://github.com/AlexsandroBezerra/college-api/issues"
   },
-  "homepage": "https://github.com/AlexsandroBezerra/college-backend#readme",
+  "homepage": "https://github.com/AlexsandroBezerra/college-api#readme",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
